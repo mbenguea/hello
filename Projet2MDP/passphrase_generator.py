@@ -18,3 +18,14 @@ class PassphraseGenerator:
                 return "Lancer de dés non valide : le nombre est en dehors de la plage."
 
         return ' '.join(passphrase)
+
+def load_eff_wordlist(file_path):
+    with open(file_path, 'r') as file:
+        return [line.strip() for line in file]
+
+if __name__ == "__main__":
+    eff_word_list = load_eff_wordlist("eff_wordlist.txt")
+    generator = PassphraseGenerator(eff_word_list)
+    dice_rolls = input("Entrez les lancers de dés (séparés par des espaces) : ").split()
+    passphrase = generator.generate_passphrase(dice_rolls)
+    print("Passphrase générée :", passphrase)

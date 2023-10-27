@@ -1,7 +1,7 @@
 # main.py
 from password_strength import PasswordStrengthTester
 from password_generator import PasswordGenerator
-from passphrase_generator import PassphraseGenerator
+from passphrase_generator import PassphraseGenerator  # Importez le module passphrase_generator
 
 if __name__ == "__main__":
     while True:
@@ -16,7 +16,7 @@ if __name__ == "__main__":
         if choix == "1":
             password = input("Entrez un mot de passe : ")
             tester = PasswordStrengthTester(password)
-            strength,entropie = tester.password_strength()
+            strength, entropie = tester.password_strength()
             print(f"Force du mot de passe : {strength}")
             print(f"entropie : {entropie}")
         elif choix == "2":
@@ -28,7 +28,10 @@ if __name__ == "__main__":
             password = generator.generate_password()
             print(f"Mot de passe généré : {password}")
         elif choix == "3":
-            word_list = ["Argentina", "Brazil", "Canada", "Amérique", "Egypt", "France"]
+            # Charger la liste de mots de l'EFF depuis le fichier eff_wordlist.txt
+            with open("eff_wordlist.txt", "r") as file:
+                word_list = [line.strip() for line in file]
+                
             generator = PassphraseGenerator(word_list)
             dice_rolls = input("Entrez les lancers de dés (ex: 1 2 3 4 5 ) : ").split()
             passphrase = generator.generate_passphrase(dice_rolls)
