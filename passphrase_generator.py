@@ -1,7 +1,5 @@
 # passphrase_generator.py
 
-import random
-
 class PassphraseGenerator:
     def __init__(self, word_list):
         self.word_list = word_list
@@ -10,14 +8,13 @@ class PassphraseGenerator:
         passphrase = []
 
         for roll in dice_rolls:
-            dice_values = [int(char) for char in roll]
-            word_index = sum([(dice_values[i] - 1) * (6 ** (4 - i)) for i in range(5)])
-            passphrase.append(self.word_list[word_index])
+            # Convertir le lancer en un entier et soustraire 1 pour tenir compte de l'indexation à partir de zéro
+            word_index = int(roll) - 1
+
+            # Vérifier si l'indice est valide
+            if 0 <= word_index < len(self.word_list):
+                passphrase.append(self.word_list[word_index])
+            else:
+                return "Lancer de dés non valide : le nombre est en dehors de la plage."
 
         return ' '.join(passphrase)
-
-# Example usage:
-# word_list = ["mot1", "mot2", ...]  # Remplacez par la liste complète de mots
-# generator = PassphraseGenerator(word_list)
-# passphrase = generator.generate_passphrase(["12345", "54321", ...])  # Remplacez par les lancers de dés
-# print(f"Passphrase générée : {passphrase}")
