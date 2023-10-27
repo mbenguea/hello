@@ -16,6 +16,6 @@ if __name__ == "__main__":
         Question("Qui a écrit 'Romeo et Juliette' ?", ["William Shakespeare", "Charles Dickens", "Jane Austen"], "William Shakespeare")
     ]
 
-    qcm = QCM(questions)
+    qcm = QCM(questions)  
     qcm.executer_qcm()
 
